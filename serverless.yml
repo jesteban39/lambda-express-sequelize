@@ -1,0 +1,21 @@
+service: lambda-express-sequelize
+frameworkVersion: '3'
+provider:
+  name: aws
+  runtime: nodejs18.x
+  iam:
+    role: arn:aws:iam::664349461262:role/lambdaExecution
+functions:
+  api:
+    handler: src/lambda.handler
+    events:
+      - httpApi: '*'
+custom:
+  esbuild:
+    bundle: true
+    minify: true
+  serverless-offline:
+    httpPort: 4000
+plugins:
+  - serverless-esbuild
+  - serverless-offline
