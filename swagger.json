@@ -10,14 +10,11 @@
     "/api/User": {
       "get": {
         "tags": ["User"],
-        "summary": null,
-        "description": null,
         "responses": {
           "200": {
-            "description": null,
             "content": {
               "application/json": {
-                "schema": {"type": "object", "properties": {}, "example": {"data": []}}
+                "schema": {"type": "object", "properties": {}, "example": null}
               }
             }
           }
@@ -25,21 +22,31 @@
       },
       "post": {
         "tags": ["User"],
-        "summary": null,
-        "description": null,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "example": {
+                  "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                  "nombre": "Esteban Quintero"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": null,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {},
                   "example": {
-                    "data": {
-                      "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
-                      "nombre": "Esteban Quintero"
-                    }
+                    "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                    "nombre": "Esteban Quintero"
                   }
                 }
               }
@@ -51,21 +58,31 @@
     "/api/User/:uuid": {
       "put": {
         "tags": ["User"],
-        "summary": null,
-        "description": null,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "example": {
+                  "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                  "nombre": "Emily Quintero"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": null,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {},
                   "example": {
-                    "data": {
-                      "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
-                      "nombre": "Emily Quintero"
-                    }
+                    "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                    "nombre": "Emily Quintero"
                   }
                 }
               }
@@ -77,14 +94,11 @@
     "/api/Client": {
       "get": {
         "tags": ["Client"],
-        "summary": null,
-        "description": null,
         "responses": {
           "200": {
-            "description": null,
             "content": {
               "application/json": {
-                "schema": {"type": "object", "properties": {}, "example": {"data": []}}
+                "schema": {"type": "object", "properties": {}, "example": null}
               }
             }
           }
@@ -92,21 +106,31 @@
       },
       "post": {
         "tags": ["Client"],
-        "summary": null,
-        "description": null,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "example": {
+                  "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                  "nombre": "Esteban Quintero"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": null,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {},
                   "example": {
-                    "data": {
-                      "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
-                      "nombre": "Esteban Quintero"
-                    }
+                    "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                    "nombre": "Esteban Quintero"
                   }
                 }
               }
@@ -118,21 +142,31 @@
     "/api/Client/:uuid": {
       "put": {
         "tags": ["Client"],
-        "summary": null,
-        "description": null,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "example": {
+                  "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                  "nombre": "Emily Quintero"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": null,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {},
                   "example": {
-                    "data": {
-                      "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
-                      "nombre": "Emily Quintero"
-                    }
+                    "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
+                    "nombre": "Emily Quintero"
                   }
                 }
               }

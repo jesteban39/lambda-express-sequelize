@@ -43,47 +43,55 @@ export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
   }
   swaggerObject.paths[action.path][action.method.toLowerCase()] = {
     tags: [action.modelName],
-    summary: null,
-    description: null,
-    responses: {}
-  }
-  swaggerObject.paths[action.path][action.method.toLowerCase()].responses[res.statusCode] = {
-    description: null,
-    content: {
-      'application/json': {
-        schema: {
-          type: 'object',
-          properties: {},
-          example: {
-            data: res.data
+    parameters: null,
+    requestBody: Boolean(action.body)
+      ? {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {},
+                example: action.body
+              }
+            }
           }
         }
+      : null,
+    responses: {}
+  }
+  swaggerObject.paths[action.path][action.method.toLowerCase()].responses[
+    res.statusCode
+  ] = {
+    content: {
+      'application/json': {
+        schema: mekeData(action.body)
       }
     }
   }
 }
 
-const mekeData = (body: any) => {
-  const type = Array.isArray(body) ? 'array' : typeof body
+const mekeData = (data: any) => {
+  const type = Array.isArray(data) ? 'array' : typeof data
 
-  if (Array.isArray(body)) {
+  if (Array.isArray(data)) {
     return {
       type: 'array',
       items: {},
-      example: body
+      example: data
     }
   }
 
-  if (typeof body === 'object') {
+  if (typeof data === 'object') {
     return {
       type: 'object',
       properties: {},
-      example: body
+      example: data
     }
   }
 
   return {
-    type: typeof body,
-    example: body
+    type: typeof data,
+    example: data
   }
 }
