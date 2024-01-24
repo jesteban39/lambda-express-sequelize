@@ -19,9 +19,19 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {},
-                  "example": {
-                    "data": []
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "example": {
+                        "id": 1,
+                        "name": "John Doe",
+                        "age": 30,
+                        "clinetes": [
+                            {"name": "John", "id": 1},
+                            {"name": "esteban", "id": 3}
+                        ]
+                      }
+                    }
                   }
                 }
               }

@@ -1,27 +1,28 @@
-import {LambdaConfog, LambdaResult, Modeln} from './types'
-import type {APIGatewayProxyHandler} from 'aws-lambda'
 import {addRoute} from './swagger'
+import type {LambdaConfog, LambdaResult} from './types'
+import type {APIGatewayProxyHandler} from 'aws-lambda'
 
 let lambda = <APIGatewayProxyHandler | null>null
 
 const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
-  let {body, headers, params, cerys, path, method} = action
-
+  const {body, headers, params, cerys, path, method} = action
   if (!lambda) throw Error('No se ha llamado a agent')
-  path = Object.entries(params).reduce(
+  const baseUrl = Object.entries(params).reduce(
     (acc, [key, value]) => acc.replace(`:${key}`, value),
     path
   )
-  path += Object.entries(cerys).reduce(
-    (acc, [key, value]) => `${acc + acc === '' ? '?' : '&'}${key}=${value}`,
-    ''
-  )
+  const fullUrl =
+    baseUrl +
+    Object.entries(cerys).reduce(
+      (acc, [key, value]) => `${acc + acc === '' ? '?' : '&'}${key}=${value}`,
+      ''
+    )
   const res = await lambda(
     {
       body: JSON.stringify(body),
       headers: headers,
       isBase64Encoded: false,
-      pathParameters: {default: path},
+      pathParameters: {default: fullUrl},
       queryStringParameters: null,
       requestContext: {
         accountId: 'offlineContext_accountId',
@@ -34,8 +35,8 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
         stage: '$default',
         httpMethod: method,
         protocol: 'http',
-        path: path,
-        resourcePath: path,
+        path: fullUrl,
+        resourcePath: fullUrl,
         requestTimeEpoch: 1,
         resourceId: '',
         identity: {
@@ -59,7 +60,7 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
       stageVariables: null,
       multiValueHeaders: {},
       httpMethod: method,
-      path: path,
+      path: fullUrl,
       multiValueQueryStringParameters: null,
       resource: ''
     },
@@ -90,19 +91,25 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
     }
   )
 
-  if (!res)
+  if (!res) {
     return {
-      body: 'Error al ejecutar la lambda',
-      headers: undefined,
-      statusCode: 500
+      statusCode: 500,
+      headers: {},
+      body: 'Error al ejecutar la lambda'
     }
-  //mekeSwagger(method, body, headers, params, cerys, path, res)
-  addRoute(action)
-  return {statusCode: res.statusCode, body: JSON.parse(res?.body), headers: res.headers}
+  }
+
+  const response = {
+    statusCode: res.statusCode,
+    body: JSON.parse(res?.body),
+    headers: res.headers ?? {}
+  }
+  addRoute(action, response)
+  return response
 }
 
 export const agent = (andler: APIGatewayProxyHandler) => {
-  if(!lambda) lambda = andler
+  if (!lambda) lambda = andler
   return spy
 }
 
@@ -112,20 +119,6 @@ const equivalent = (actual: {[x: string]: any}, initial: {[x: string]: any}) => 
     ecual[key] = actual[key]
     return ecual
   }, {})
-}
-
-const mekeEvent = (config: LambdaConfog) => {
-  return {
-    httpMethod: config.method,
-    queryStringParameters: config.params,
-    headers: config.headers, // ?? {'Content-Type': 'application/json; charset=utf-8'},
-    path: config.path,
-    body: JSON.stringify(config.body),
-    requestContext: {
-      resourcePath: config.path,
-      httpMethod: config.method
-    }
-  }
 }
 
 export default agent

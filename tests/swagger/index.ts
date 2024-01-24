@@ -1,9 +1,8 @@
 import yaml from 'js-yaml'
 import fs from 'fs'
-import {mekeSchemas} from './mekeSchemas'
 import {mekeSchema} from './mekeSchema'
 import type {ModelStatic, Model} from 'sequelize'
-import type {LambdaConfog as Action} from '../types'
+import type {LambdaConfog, LambdaResult} from '../types'
 
 export type Models = {[key: string]: ModelStatic<Model<any, any>>}
 
@@ -31,27 +30,14 @@ export const saveSwagger = () => {
   fs.writeFileSync('./swagger.json', JSON.stringify(swaggerObject), 'utf8')
 }
 
-const addSchemas = (md: Models) => {
-  models = md
-  swaggerObject.components.schemas = mekeSchemas(md)
-  //swaggerObject.components.definitions = mekeSchemas(md)
-  swaggerObject.components.tags = Object.keys(md).map((key) => ({
-    name: key,
-    description: null
-  }))
-}
-
 export const addModel = (model: ModelStatic<Model<any, any>>) => {
   models[model.name] = model
   swaggerObject.components.schemas[model.name] = mekeSchema(model)
   //swaggerObject.components.definitions[model.name] = mekeSchema(model)
-  swaggerObject.components.tags = Object.keys(model).map((key) => ({
-    name: key,
-    description: null
-  }))
+  swaggerObject.components.tags.push(model.name)
 }
 
-export const addRoute = (action: Action) => {
+export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
   if (!swaggerObject.paths[action.path]) {
     swaggerObject.paths[action.path] = {}
   }
@@ -59,24 +45,72 @@ export const addRoute = (action: Action) => {
     tags: [action.modelName],
     summary: null,
     description: null,
-    responses: {
-      '200': {
-        description: null,
-        content: {
-          'application/json': {
-            schema: {
-              type: 'array',
-              items: {
-                allOf: [
-                  {
-                    $ref: `#/components/schemas/${action.modelName}`
-                  }
-                ]
-              }
+    responses: {}
+  }
+  swaggerObject.paths[action.path][action.method.toLowerCase()][res.statusCode] = {
+    description: null,
+    content: {
+      description: null,
+      content: {
+        'application/json': {
+          schema: {
+            type: 'object',
+            properties: {},
+            example: {
+              data: []
             }
           }
         }
       }
     }
+  }
+}
+
+const mekeData = (body: any) => {
+  //const type = typeof body === 'object' && Array.isArray(body) ? 'array' : type
+
+  if (Array.isArray(body)) {
+    return {
+      type: 'array',
+      items: {},
+      example: body
+    }
+  }
+
+  if (typeof body === 'object') {
+    return {
+      type: 'object',
+      properties: {},
+      example: body
+    }
+  }
+
+  return {
+    type: typeof body,
+    example: body
+  }
+}
+
+const mekeBody = (body: any) => {
+  return {
+    type: 'array',
+    items: []
+  }
+
+  if (Array.isArray(body)) {
+    return {
+      type: 'array',
+      items: {}
+    }
+  }
+  if (typeof body === 'object') {
+    return {
+      type: 'object',
+      properties: {}
+    }
+  }
+  return {
+    type: 'object',
+    properties: {}
   }
 }

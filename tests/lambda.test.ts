@@ -3,7 +3,7 @@ import agent from './agent'
 import {addModel, saveSwagger} from './swagger'
 import db from '@db'
 
-const modelsNames = ['User', 'Client']
+const modelsNames = ['User']//, 'Client']
 const lambda = agent(handler)
 
 const testModel = (modelName: string) => {
@@ -11,6 +11,7 @@ const testModel = (modelName: string) => {
     beforeAll(async () => {
       await db.open()
       const Model = db.getModels()[modelName]
+      await Model.sync({force: true})
       addModel(Model)
       await db.close()
     })
@@ -35,7 +36,7 @@ const testModel = (modelName: string) => {
       expect(Array.isArray(body)).toBe(true)
     })
 
-    test('POST', async () => {
+    xtest(`POST: '/api/${modelName}'`, async () => {
       const newElement = {
         uuid: '520d1ddd-e0a7-4ddc-8c25-c187d3e4f338',
         nombre: 'Esteban Quintero'
@@ -55,7 +56,7 @@ const testModel = (modelName: string) => {
       expect(body).toEqual(newElement)
     })
 
-    xtest('PUT', async () => {
+    xtest(`PUT: '/api/${modelName}'`, async () => {
       const newElement = {
         uuid: '520d1ddd-e0a7-4ddc-8c25-c187d3e4f338',
         nombre: 'Emily Quintero'

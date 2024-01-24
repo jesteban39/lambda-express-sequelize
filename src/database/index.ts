@@ -41,7 +41,7 @@ export const open = async (): Promise<Sequelize> => {
   }
   defineSequelize()
   await sequelize.authenticate()
-  await sequelize.sync({force: true})
+  await sequelize.sync({force: false, altert: true})
   return sequelize
 }
 

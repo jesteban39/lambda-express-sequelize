@@ -11,8 +11,8 @@ export type LambdaConfog = {
 }
 
 export type LambdaResult = {
-  headers: {[header: string]: string | number | boolean} | undefined
   statusCode: number
+  headers: {[header: string]: string | number | boolean}
   body: any
 }
 
