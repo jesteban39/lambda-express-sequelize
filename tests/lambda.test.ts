@@ -30,10 +30,10 @@ const testModel = (modelName: string) => {
         headers: {},
         body: null
       }
-      const {statusCode, headers, body} = await lambda(config)
+      const {statusCode, headers, data} = await lambda(config)
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
-      expect(Array.isArray(body)).toBe(true)
+      expect(Array.isArray(data)).toBe(true)
     })
 
     test(`POST: '/api/${modelName}'`, async () => {
@@ -50,10 +50,10 @@ const testModel = (modelName: string) => {
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: newElement
       }
-      const {statusCode, headers, body} = await lambda(config)
+      const {statusCode, headers, data} = await lambda(config)
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
-      expect(body).toEqual(newElement)
+      expect(data).toEqual(newElement)
     })
 
     test(`PUT: '/api/${modelName}'`, async () => {
@@ -70,10 +70,10 @@ const testModel = (modelName: string) => {
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: newElement
       }
-      const {statusCode, headers, body} = await lambda(config)
+      const {statusCode, headers, data} = await lambda(config)
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
-      expect(body).toEqual(newElement)
+      expect(data).toEqual(newElement)
     })
   })
 }

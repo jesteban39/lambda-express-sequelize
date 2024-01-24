@@ -13,7 +13,8 @@ export type LambdaConfog = {
 export type LambdaResult = {
   statusCode: number
   headers: {[header: string]: string | number | boolean}
-  body: any
+  body: string
+  data: any
 }
 
 export type Modeln = ModelStatic<Model<any, any>>

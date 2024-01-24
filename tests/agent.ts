@@ -94,14 +94,16 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
   if (!res) {
     return {
       statusCode: 500,
-      headers: {},
-      body: 'Error al ejecutar la lambda'
+      data: {},
+      body: 'Error al ejecutar la lambda',
+      headers: {}
     }
   }
 
   const response = {
     statusCode: res.statusCode,
-    body: JSON.parse(res?.body),
+    body: res?.body,
+    data: JSON.parse(res?.body),
     headers: res.headers ?? {}
   }
   addRoute(action, response)

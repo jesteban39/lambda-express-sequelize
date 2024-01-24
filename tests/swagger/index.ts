@@ -55,7 +55,7 @@ export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
           type: 'object',
           properties: {},
           example: {
-            data: res.body
+            data: res.data
           }
         }
       }

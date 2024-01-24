@@ -8,7 +8,7 @@ const jestConfig: Config.InitialOptions = {
   detectOpenHandles: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['dist/', 'node_modules/'],
+  testPathIgnorePatterns: ['dist/', 'node_modules/','coverage/'],
   modulePaths: [compilerOptions.baseUrl],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths)
 }
