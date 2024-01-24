@@ -8,9 +8,12 @@ info:
 paths:
   /api/User:
     get:
-      '200':
-        description: null
-        content:
+      tags:
+        - User
+      summary: null
+      description: null
+      responses:
+        '200':
           description: null
           content:
             application/json:
@@ -19,11 +22,92 @@ paths:
                 properties: {}
                 example:
                   data: []
+    post:
       tags:
         - User
       summary: null
       description: null
-      responses: {}
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  data:
+                    uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
+                    nombre: Esteban Quintero
+  /api/User/:uuid:
+    put:
+      tags:
+        - User
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  data:
+                    uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
+                    nombre: Emily Quintero
+  /api/Client:
+    get:
+      tags:
+        - Client
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  data: []
+    post:
+      tags:
+        - Client
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  data:
+                    uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
+                    nombre: Esteban Quintero
+  /api/Client/:uuid:
+    put:
+      tags:
+        - Client
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  data:
+                    uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
+                    nombre: Emily Quintero
 components:
   parameters: {}
   definitions: {}
@@ -41,5 +125,19 @@ components:
           required: true
           description: nombre de usuario
           example: '3973'
+    Client:
+      type: object
+      properties:
+        uuid:
+          type: string
+          required: true
+          description: identificador universal unico para la tabal cliente
+          example: '3973'
+        nombre:
+          type: string
+          required: true
+          description: nombre del clinete
+          example: '3973'
   tags:
     - User
+    - Client

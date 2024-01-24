@@ -47,18 +47,15 @@ export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
     description: null,
     responses: {}
   }
-  swaggerObject.paths[action.path][action.method.toLowerCase()][res.statusCode] = {
+  swaggerObject.paths[action.path][action.method.toLowerCase()].responses[res.statusCode] = {
     description: null,
     content: {
-      description: null,
-      content: {
-        'application/json': {
-          schema: {
-            type: 'object',
-            properties: {},
-            example: {
-              data: []
-            }
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {},
+          example: {
+            data: res.body
           }
         }
       }
@@ -67,7 +64,7 @@ export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
 }
 
 const mekeData = (body: any) => {
-  //const type = typeof body === 'object' && Array.isArray(body) ? 'array' : type
+  const type = Array.isArray(body) ? 'array' : typeof body
 
   if (Array.isArray(body)) {
     return {
@@ -88,29 +85,5 @@ const mekeData = (body: any) => {
   return {
     type: typeof body,
     example: body
-  }
-}
-
-const mekeBody = (body: any) => {
-  return {
-    type: 'array',
-    items: []
-  }
-
-  if (Array.isArray(body)) {
-    return {
-      type: 'array',
-      items: {}
-    }
-  }
-  if (typeof body === 'object') {
-    return {
-      type: 'object',
-      properties: {}
-    }
-  }
-  return {
-    type: 'object',
-    properties: {}
   }
 }
