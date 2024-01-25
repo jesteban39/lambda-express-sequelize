@@ -37,13 +37,35 @@ export const addModel = (model: ModelStatic<Model<any, any>>) => {
   swaggerObject.components.tags.push(model.name)
 }
 
+export interface Parameters {
+  name: string
+  in: string
+  type: string
+  required: boolean
+}
+
 export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
-  if (!swaggerObject.paths[action.path]) {
-    swaggerObject.paths[action.path] = {}
+  const [baseUrl, parameters] = Object.entries(action.params).reduce(
+    ([path, parameters], [key, value]) => {
+      path = path.replace(`:${key}`, `{${key}}`)
+      parameters.push({
+        name: key,
+        in: 'path',
+        type: typeof value,
+        required: true
+      })
+      return [path, parameters]
+    },
+    [action.path, [] as Parameters[]]
+  )
+
+  if (!swaggerObject.paths[baseUrl]) {
+    swaggerObject.paths[baseUrl] = {}
   }
-  swaggerObject.paths[action.path][action.method.toLowerCase()] = {
+
+  swaggerObject.paths[baseUrl][action.method.toLowerCase()] = {
     tags: [action.modelName],
-    parameters: null,
+    parameters,
     requestBody: Boolean(action.body)
       ? {
           required: true,
@@ -60,12 +82,10 @@ export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
       : null,
     responses: {}
   }
-  swaggerObject.paths[action.path][action.method.toLowerCase()].responses[
-    res.statusCode
-  ] = {
+  swaggerObject.paths[baseUrl][action.method.toLowerCase()].responses[res.statusCode] = {
     content: {
       'application/json': {
-        schema: mekeData(action.body)
+        schema: mekeData(res.data)
       }
     }
   }
@@ -74,24 +94,8 @@ export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
 const mekeData = (data: any) => {
   const type = Array.isArray(data) ? 'array' : typeof data
 
-  if (Array.isArray(data)) {
-    return {
-      type: 'array',
-      items: {},
-      example: data
-    }
-  }
-
-  if (typeof data === 'object') {
-    return {
-      type: 'object',
-      properties: {},
-      example: data
-    }
-  }
-
   return {
-    type: typeof data,
+    type: type,
     example: data
   }
 }

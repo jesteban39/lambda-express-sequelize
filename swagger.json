@@ -10,18 +10,17 @@
     "/api/User": {
       "get": {
         "tags": ["User"],
+        "parameters": [],
+        "requestBody": null,
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {"type": "object", "properties": {}, "example": null}
-              }
-            }
+            "content": {"application/json": {"schema": {"type": "array", "example": []}}}
           }
         }
       },
       "post": {
         "tags": ["User"],
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -43,7 +42,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {},
                   "example": {
                     "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
                     "nombre": "Esteban Quintero"
@@ -55,9 +53,12 @@
         }
       }
     },
-    "/api/User/:uuid": {
+    "/api/User/{uuid}": {
       "put": {
         "tags": ["User"],
+        "parameters": [
+          {"name": "uuid", "in": "path", "type": "string", "required": true}
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -79,7 +80,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {},
                   "example": {
                     "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
                     "nombre": "Emily Quintero"
@@ -94,18 +94,17 @@
     "/api/Client": {
       "get": {
         "tags": ["Client"],
+        "parameters": [],
+        "requestBody": null,
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "schema": {"type": "object", "properties": {}, "example": null}
-              }
-            }
+            "content": {"application/json": {"schema": {"type": "array", "example": []}}}
           }
         }
       },
       "post": {
         "tags": ["Client"],
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -127,7 +126,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {},
                   "example": {
                     "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
                     "nombre": "Esteban Quintero"
@@ -139,9 +137,12 @@
         }
       }
     },
-    "/api/Client/:uuid": {
+    "/api/Client/{uuid}": {
       "put": {
         "tags": ["Client"],
+        "parameters": [
+          {"name": "uuid", "in": "path", "type": "string", "required": true}
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -163,7 +164,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {},
                   "example": {
                     "uuid": "520d1ddd-e0a7-4ddc-8c25-c187d3e4f338",
                     "nombre": "Emily Quintero"
