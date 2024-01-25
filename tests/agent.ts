@@ -2,23 +2,44 @@ import {addRoute} from './swagger'
 import type {LambdaConfog, LambdaResult} from './types'
 import type {APIGatewayProxyHandler} from 'aws-lambda'
 
+interface ApiHandler extends APIGatewayProxyHandler {
+  cookies: any[]
+}
+
 let lambda = <APIGatewayProxyHandler | null>null
 
 const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
-  const {body, headers, params, cerys, path, method} = action
+  console.log(action)
+  const {body, headers, params, querys, path, method} = action
   if (!lambda) throw Error('No se ha llamado a agent')
   const url = Object.entries(params).reduce(
     (acc, [key, value]) => acc.replace(`:${key}`, value),
     path
   )
 
+  const queryString = Object.entries(querys).reduce(
+    (acc, [key, value]) => `${acc}${!acc ? '' : '&'}${key}=${value}`,
+    ''
+  )
+
   const res = await lambda(
     {
-      body: JSON.stringify(body),
+      body: body ? JSON.stringify(body) : null,
+      cookies: [],
       headers: headers,
       isBase64Encoded: false,
       pathParameters: {default: url},
-      queryStringParameters: null,
+      queryStringParameters: querys,
+      rawPath: url,
+      rawQueryString: queryString,
+      routeKey: '$default',
+      stageVariables: null,
+      version: '2.0',
+      multiValueHeaders: {},
+      httpMethod: method,
+      path: url,
+      multiValueQueryStringParameters: queryString,
+      resource: '',
       requestContext: {
         accountId: 'offlineContext_accountId',
         apiId: 'offlineContext_apiId',
@@ -34,6 +55,9 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
         resourcePath: url,
         requestTimeEpoch: 1,
         resourceId: '',
+        operationName: undefined,
+        time: Date.now().toLocaleString(), 
+        timeEpoch: Date.now(),
         identity: {
           accessKey: null,
           accountId: null,
@@ -50,15 +74,16 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
           user: null,
           userAgent: null,
           userArn: null
+        },
+        http: {
+          method: method,
+          path: url,
+          protocol: 'HTTP/1.1',
+          sourceIp: '::1',
+          userAgent: 'PostmanRuntime/7.36.1'
         }
-      },
-      stageVariables: null,
-      multiValueHeaders: {},
-      httpMethod: method,
-      path: url,
-      multiValueQueryStringParameters: null,
-      resource: ''
-    },
+      }
+    } as any,
     {
       callbackWaitsForEmptyEventLoop: false,
       functionName: '',
@@ -95,7 +120,7 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
     }
   }
 
-  console.log(res?.body)
+  console.log(res)
 
   const response = {
     statusCode: res.statusCode,

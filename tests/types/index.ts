@@ -5,7 +5,7 @@ export type LambdaConfog = {
   path: string
   modelName: string
   params: {[key: string]: string}
-  cerys: {[key: string]: string}
+  querys: {[key: string]: string}
   headers: {[header: string]: string}
   body: any
 }

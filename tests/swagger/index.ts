@@ -53,7 +53,7 @@ export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
   swaggerObject.paths[url][action.method.toLowerCase()] = {
     tags: [action.modelName],
     parameters,
-    requestBody: Boolean(action.body)
+    requestBody: action.body
       ? {
           required: true,
           content: {
@@ -101,7 +101,7 @@ const getParameters = (action: LambdaConfog) => {
     [action.path, [] as Parameters[]]
   )
 
-  const [url, parameters] = Object.entries(action.cerys).reduce(
+  const [url, parameters] = Object.entries(action.querys).reduce(
     ([path, parameters], [key, value]) => {
       path += `${!path.includes('?') ? '?' : '&'}${key}={${key}}`
       parameters.push({

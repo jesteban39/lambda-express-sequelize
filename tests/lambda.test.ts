@@ -26,7 +26,7 @@ const testModel = (modelName: string) => {
         path: `/api/${modelName}`,
         modelName,
         params: {},
-        cerys: {},
+        querys: {},
         headers: {},
         body: null
       }
@@ -46,7 +46,7 @@ const testModel = (modelName: string) => {
         path: `/api/${modelName}`,
         modelName,
         params: {},
-        cerys: {},
+        querys: {},
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: newElement
       }
@@ -66,7 +66,7 @@ const testModel = (modelName: string) => {
         path: `/api/${modelName}/:uuid`,
         modelName,
         params: {uuid: newElement.uuid},
-        cerys: {},
+        querys: {},
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: newElement
       }
@@ -77,12 +77,16 @@ const testModel = (modelName: string) => {
     })
 
     test(`GET: '/api/${modelName}/filter'`, async () => {
+      const newElement = {
+        uuid: '520d1ddd-e0a7-4ddc-8c25-c187d3e4f338',
+        nombre: 'Emily Quintero'
+      }
       const config = {
         method: 'GET',
         path: `/api/${modelName}/filter`,
         modelName,
         params: {},
-        cerys: {nombre: 'Quinte'},
+        querys: {nombre: newElement.nombre},
         headers: {},
         body: null
       }
@@ -90,7 +94,7 @@ const testModel = (modelName: string) => {
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
       expect(Array.isArray(data)).toBe(true)
-      expect(data[0].nombre).toEqual('Emily Quintero')
+      expect(data[0].nombre).toEqual(newElement.nombre)
     })
   })
 }
