@@ -75,6 +75,23 @@ const testModel = (modelName: string) => {
       expect(headers?.['content-type']).toMatch(/application\/json/)
       expect(data).toEqual(newElement)
     })
+
+    test(`GET: '/api/${modelName}/filter'`, async () => {
+      const config = {
+        method: 'GET',
+        path: `/api/${modelName}/filter`,
+        modelName,
+        params: {},
+        cerys: {nombre: 'Quinte'},
+        headers: {},
+        body: null
+      }
+      const {statusCode, headers, data} = await lambda(config)
+      expect(statusCode).toBe(200)
+      expect(headers?.['content-type']).toMatch(/application\/json/)
+      expect(Array.isArray(data)).toBe(true)
+      expect(data[0].nombre).toEqual('Emily Quintero')
+    })
   })
 }
 

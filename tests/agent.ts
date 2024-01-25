@@ -7,22 +7,17 @@ let lambda = <APIGatewayProxyHandler | null>null
 const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
   const {body, headers, params, cerys, path, method} = action
   if (!lambda) throw Error('No se ha llamado a agent')
-  const baseUrl = Object.entries(params).reduce(
+  const url = Object.entries(params).reduce(
     (acc, [key, value]) => acc.replace(`:${key}`, value),
     path
   )
-  const fullUrl =
-    baseUrl +
-    Object.entries(cerys).reduce(
-      (acc, [key, value]) => `${acc + acc === '' ? '?' : '&'}${key}=${value}`,
-      ''
-    )
+
   const res = await lambda(
     {
       body: JSON.stringify(body),
       headers: headers,
       isBase64Encoded: false,
-      pathParameters: {default: fullUrl},
+      pathParameters: {default: url},
       queryStringParameters: null,
       requestContext: {
         accountId: 'offlineContext_accountId',
@@ -35,8 +30,8 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
         stage: '$default',
         httpMethod: method,
         protocol: 'http',
-        path: fullUrl,
-        resourcePath: fullUrl,
+        path: url,
+        resourcePath: url,
         requestTimeEpoch: 1,
         resourceId: '',
         identity: {
@@ -60,7 +55,7 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
       stageVariables: null,
       multiValueHeaders: {},
       httpMethod: method,
-      path: fullUrl,
+      path: url,
       multiValueQueryStringParameters: null,
       resource: ''
     },
@@ -100,10 +95,12 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
     }
   }
 
+  console.log(res?.body)
+
   const response = {
     statusCode: res.statusCode,
     body: res?.body,
-    data: JSON.parse(res?.body),
+    data: await JSON.parse(res?.body),
     headers: res.headers ?? {}
   }
   addRoute(action, response)

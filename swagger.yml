@@ -70,6 +70,25 @@ paths:
                 example:
                   uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
                   nombre: Emily Quintero
+  /api/User/filter?nombre={nombre}:
+    get:
+      tags:
+        - User
+      parameters:
+        - name: nombre
+          in: path
+          type: string
+          required: false
+      requestBody: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
+                    nombre: Emily Quintero
   /api/Client:
     get:
       tags:
@@ -134,11 +153,30 @@ paths:
                 example:
                   uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
                   nombre: Emily Quintero
+  /api/Client/filter?nombre={nombre}:
+    get:
+      tags:
+        - Client
+      parameters:
+        - name: nombre
+          in: path
+          type: string
+          required: false
+      requestBody: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
+                    nombre: Emily Quintero
 components:
   parameters: {}
   definitions: {}
   schemas:
-    User:
+    usuario:
       type: object
       properties:
         uuid:
@@ -151,7 +189,7 @@ components:
           required: true
           description: nombre de usuario
           example: '3973'
-    Client:
+    cliente:
       type: object
       properties:
         uuid:
