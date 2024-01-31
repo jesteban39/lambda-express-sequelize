@@ -31,7 +31,7 @@ let swaggerObject: any = {
 export const saveSwagger = () => {
   fs.writeFileSync('./swagger.json', JSON.stringify(swaggerObject), 'utf8')
   fs.writeFileSync('./swagger.yml', yaml.dump(swaggerObject), 'utf8')
-  //fs.writeFileSync('../examples.json', JSON.stringify(exp), 'utf8')
+  fs.writeFileSync('./tests/examples.json', JSON.stringify(exp), 'utf8')
 }
 
 const mekeExample = (model: ModelStatic<Model<any, any>>) => {
