@@ -6,6 +6,7 @@ export default {
     allowNull: false,
     unique: true,
     primaryKey: true,
+    defaultValue: DataTypes.UUIDV4,
     comment: 'identificador universal unico para la tabal cliente'
   },
   nombre: {

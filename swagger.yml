@@ -18,7 +18,13 @@ paths:
             application/json:
               schema:
                 type: array
-                example: []
+                example:
+                  - uuid: 520d1ddd-039
+                    nombre: nombre User usuario
+                  - uuid: 520d1ddd-040
+                    nombre: nombre User usuario
+                  - uuid: 520d1ddd-041
+                    nombre: nombre User usuario
     post:
       tags:
         - User
@@ -29,19 +35,16 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-              example:
-                uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                nombre: Esteban Quintero
+              example: &ref_0
+                uuid: 520d1ddd-042
+                nombre: nombre User usuario
       responses:
         '200':
           content:
             application/json:
               schema:
                 type: object
-                example:
-                  uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                  nombre: Esteban Quintero
+                example: *ref_0
   /api/User/{uuid}:
     put:
       tags:
@@ -57,19 +60,16 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-              example:
-                uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                nombre: Emily Quintero
+              example: &ref_1
+                uuid: 520d1ddd-039
+                nombre: nuevo nombre usuario
       responses:
         '200':
           content:
             application/json:
               schema:
                 type: object
-                example:
-                  uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                  nombre: Emily Quintero
+                example: *ref_1
   /api/User/filter?nombre={nombre}:
     get:
       tags:
@@ -87,8 +87,12 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                    nombre: Emily Quintero
+                  - uuid: 520d1ddd-040
+                    nombre: nombre User usuario
+                  - uuid: 520d1ddd-041
+                    nombre: nombre User usuario
+                  - uuid: 520d1ddd-042
+                    nombre: nombre User usuario
   /api/Client:
     get:
       tags:
@@ -101,7 +105,13 @@ paths:
             application/json:
               schema:
                 type: array
-                example: []
+                example:
+                  - uuid: 15b781bf-fa91-47b0-acb1-9a042170693d
+                    nombre: cliente nombre
+                  - uuid: b2c3f79a-1dbd-44c7-ae82-69868c0f762b
+                    nombre: cliente nombre
+                  - uuid: e5d249c5-99a9-4a1d-baa3-b85484ac86e5
+                    nombre: cliente nombre
     post:
       tags:
         - Client
@@ -112,19 +122,16 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-              example:
-                uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                nombre: Esteban Quintero
+              example: &ref_2
+                uuid: 4bcf14e9-1450-46b1-a9d0-d341cdc6bf2c
+                nombre: cliente nombre
       responses:
         '200':
           content:
             application/json:
               schema:
                 type: object
-                example:
-                  uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                  nombre: Esteban Quintero
+                example: *ref_2
   /api/Client/{uuid}:
     put:
       tags:
@@ -140,19 +147,16 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-              example:
-                uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                nombre: Emily Quintero
+              example: &ref_3
+                uuid: 15b781bf-fa91-47b0-acb1-9a042170693d
+                nombre: cliente nombre
       responses:
         '200':
           content:
             application/json:
               schema:
                 type: object
-                example:
-                  uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                  nombre: Emily Quintero
+                example: *ref_3
   /api/Client/filter?nombre={nombre}:
     get:
       tags:
@@ -170,8 +174,14 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 520d1ddd-e0a7-4ddc-8c25-c187d3e4f338
-                    nombre: Emily Quintero
+                  - uuid: 15b781bf-fa91-47b0-acb1-9a042170693d
+                    nombre: cliente nombre
+                  - uuid: 4bcf14e9-1450-46b1-a9d0-d341cdc6bf2c
+                    nombre: cliente nombre
+                  - uuid: b2c3f79a-1dbd-44c7-ae82-69868c0f762b
+                    nombre: cliente nombre
+                  - uuid: e5d249c5-99a9-4a1d-baa3-b85484ac86e5
+                    nombre: cliente nombre
 components:
   parameters: {}
   definitions: {}

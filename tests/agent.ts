@@ -2,10 +2,6 @@ import {addRoute} from './swagger'
 import type {LambdaConfog, LambdaResult} from './types'
 import type {APIGatewayProxyHandler} from 'aws-lambda'
 
-interface ApiHandler extends APIGatewayProxyHandler {
-  cookies: any[]
-}
-
 let lambda = <APIGatewayProxyHandler | null>null
 
 const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
@@ -119,8 +115,6 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
       headers: {}
     }
   }
-
-  console.log(res)
 
   const response = {
     statusCode: res.statusCode,

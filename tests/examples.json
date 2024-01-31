@@ -1,0 +1,26 @@
+{
+  "User": {
+    "list": [
+      {
+        "uuid": "520d1ddd-039",
+        "nombre": "nombre User usuario"
+      },
+      {
+        "uuid": "520d1ddd-040",
+        "nombre": "nombre User usuario"
+      },
+      {
+        "uuid": "520d1ddd-041",
+        "nombre": "nombre User usuario"
+      }
+    ],
+    "new": {
+      "uuid": "520d1ddd-042",
+      "nombre": "nombre User usuario"
+    },
+    "edit": {
+      "uuid": "520d1ddd-039",
+      "nombre": "nuevo nombre usuario"
+    }
+  }
+}

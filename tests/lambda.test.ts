@@ -5,6 +5,7 @@ import db from '@db'
 
 const modelsNames = ['User', 'Client']
 const lambda = agent(handler)
+let examples: any = {}
 
 const testModel = (modelName: string) => {
   describe(`Routes for model ${modelName}`, () => {
@@ -12,7 +13,9 @@ const testModel = (modelName: string) => {
       await db.open()
       const Model = db.getModels()[modelName]
       await Model.sync({force: true})
-      addModel(Model)
+      examples = addModel(Model)
+      console.log(examples)
+      await Model.bulkCreate(examples[modelName].list)
       await db.close()
     })
 
@@ -34,13 +37,11 @@ const testModel = (modelName: string) => {
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
       expect(Array.isArray(data)).toBe(true)
+      expect(data.length).toBe(examples[modelName].list.length)
     })
 
     test(`POST: '/api/${modelName}'`, async () => {
-      const newElement = {
-        uuid: '520d1ddd-e0a7-4ddc-8c25-c187d3e4f338',
-        nombre: 'Esteban Quintero'
-      }
+      const newElement = examples[modelName].new
       const config = {
         method: 'POST',
         path: `/api/${modelName}`,
@@ -57,30 +58,24 @@ const testModel = (modelName: string) => {
     })
 
     test(`PUT: '/api/${modelName}'`, async () => {
-      const newElement = {
-        uuid: '520d1ddd-e0a7-4ddc-8c25-c187d3e4f338',
-        nombre: 'Emily Quintero'
-      }
+      const editElement = examples[modelName].edit
       const config = {
         method: 'PUT',
         path: `/api/${modelName}/:uuid`,
         modelName,
-        params: {uuid: newElement.uuid},
+        params: {uuid: editElement.uuid},
         querys: {},
         headers: {'Content-Type': 'application/json; charset=utf-8'},
-        body: newElement
+        body: editElement
       }
       const {statusCode, headers, data} = await lambda(config)
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
-      expect(data).toEqual(newElement)
+      expect(data).toEqual(editElement)
     })
 
     test(`GET: '/api/${modelName}/filter'`, async () => {
-      const newElement = {
-        uuid: '520d1ddd-e0a7-4ddc-8c25-c187d3e4f338',
-        nombre: 'Emily Quintero'
-      }
+      const newElement = examples[modelName].list[1]
       const config = {
         method: 'GET',
         path: `/api/${modelName}/filter`,
