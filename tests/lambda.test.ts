@@ -4,9 +4,10 @@ import agent from './agent'
 import {addModel, saveSwagger} from './swagger'
 import db from '@db'
 
-let modelsNames: string[] = []
 const lambda = agent(handler)
 let examples: any = {}
+const directorio = './src/database/models'
+const folders = fs.readdirSync(directorio)
 
 const testModel = (modelName: string) => {
   describe(`Routes for model ${modelName}`, () => {
@@ -18,8 +19,6 @@ const testModel = (modelName: string) => {
       await Model.bulkCreate(examples[modelName].list)
       await db.close()
     })
-
-    afterAll(async () => {})
 
     test(`GET: '/api/${modelName}'`, async () => {
       const config = {
@@ -92,82 +91,21 @@ const testModel = (modelName: string) => {
   })
 }
 
-const runT = (n: string) => {
-  test('model ' + n, async () => {
-    expect(n).toEqual(n)
+describe('Tests for CRUD', () => {
+  beforeAll(async () => {
+    const seq = await db.open()
+    await seq.sync({force: true})
+    await db.close()
   })
-}
 
-const runD = (n: string) => {
-  describe('Run disclibe ' + n, () => {
-    test('model ' + n, async () => {
-      expect(n).toEqual(n)
-    })
-  })
-}
+  afterAll(saveSwagger)
 
-// describe(`Routes for models`, () => {
-//   let modelsNames: string[] = []
-
-//   beforeAll(async () => {
-//     const seq = await db.open()
-//     modelsNames = Object.keys(seq.models)
-//     await seq.sync({force: true})
-//     await db.close()
-//   })
-
-//   describe(`Routes for models`, () => {
-//     test('numero de modelos', async () => {
-//       expect(modelsNames.length).toEqual(2)
-//     })
-
-//     for(let i = 0; i < modelsNames.length; i++) {
-//       segundoT(modelsNames[i])
-//     }
-
-//     //modelsNames.forEach((name) => segundoT(name))
-//     //modelsNames.forEach((name) => testModel(name))
-//   })
-// })
-
-const runTest = () => {
-  // const seq = await db.open()
-  // await seq.sync({force: true})
-  let modelsNames: string[] = ['User', 'Client'] // Object.keys(seq.models)
-  const lambda = agent(handler)
-  let examples: any = {}
-  //await Promise.all(modelsNames.map((name) => testModel(name)))
-  //saveSwagger()
-
-  describe(`Routes for models`, () => {
-    beforeAll(async () => {
-      const seq = await db.open()
-      modelsNames = Object.keys(seq.models)
-      await seq.sync({force: true})
-      await db.close()
-    })
-
-    test('numero de modelos', async () => {
-      expect(modelsNames.length).toEqual(2)
-    })
-
-    //modelsNames.forEach((name) => runD(name))
-    //modelsNames.forEach((name) => testModel(name))
-  })
-}
-
-//runTest()
-
-const directorio = './src/database/models'
-const folders = fs.readdirSync(directorio)
-folders.forEach((file) => {
-  const path = directorio + '/' + file
-  const stats = fs.statSync(path)
-  if (stats.isFile()) {
-    const modelName = file.charAt(0).toUpperCase() + file.slice(1).replace('.ts', '')
-
-    describe(`Tests for Model: ${modelName}`, () => {
+  folders.forEach((file) => {
+    const path = directorio + '/' + file
+    const stats = fs.statSync(path)
+    if (stats.isFile()) {
+      const modelName = file.charAt(0).toUpperCase() + file.slice(1).replace('.ts', '')
       testModel(modelName)
-    })
-  }
+    }
+  })
 })

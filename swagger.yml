@@ -6,95 +6,6 @@ info:
   servers:
     - http://localhost:4000
 paths:
-  /api/User:
-    get:
-      tags:
-        - User
-      parameters: []
-      requestBody: null
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                example:
-                  - uuid: 5aef01b3-e75b-4d8b-8992-133b41fa4a13
-                    nombre: usuario nombre
-                  - uuid: bd2f5adf-8820-4395-af04-190cbf067441
-                    nombre: usuario nombre
-                  - uuid: fbf17a72-7971-44fc-bf5d-f74e11032264
-                    nombre: usuario nombre
-    post:
-      tags:
-        - User
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              example: &ref_0
-                uuid: 8d85f842-1e6e-4829-97fc-f852dff7a5c6
-                nombre: usuario nombre
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                example: *ref_0
-  /api/User/{uuid}:
-    put:
-      tags:
-        - User
-      parameters:
-        - name: uuid
-          in: path
-          type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              example: &ref_1
-                uuid: bd2f5adf-8820-4395-af04-190cbf067441
-                nombre: usuario nombre
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                example: *ref_1
-  /api/User/filter?nombre={nombre}:
-    get:
-      tags:
-        - User
-      parameters:
-        - name: nombre
-          in: path
-          type: string
-          required: false
-      requestBody: null
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                example:
-                  - uuid: 5aef01b3-e75b-4d8b-8992-133b41fa4a13
-                    nombre: usuario nombre
-                  - uuid: 8d85f842-1e6e-4829-97fc-f852dff7a5c6
-                    nombre: usuario nombre
-                  - uuid: bd2f5adf-8820-4395-af04-190cbf067441
-                    nombre: usuario nombre
-                  - uuid: fbf17a72-7971-44fc-bf5d-f74e11032264
-                    nombre: usuario nombre
   /api/Client:
     get:
       tags:
@@ -108,11 +19,11 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 3df7b3ac-6e90-474b-9f06-3b027416434e
+                  - uuid: 045a351a-8cbf-4cb3-8ce1-7efc5a2c358e
                     nombre: cliente nombre
-                  - uuid: ab2f5c9d-2304-4340-bf2c-a3cd26358ea8
+                  - uuid: 0665b7bf-64d7-4b9b-b907-cb41e6bcd280
                     nombre: cliente nombre
-                  - uuid: dd9b7858-86fe-458d-b9ab-d8993e2f2e7f
+                  - uuid: 1acf0233-5501-4ca8-ae01-25d1574e3c43
                     nombre: cliente nombre
     post:
       tags:
@@ -124,8 +35,8 @@ paths:
           application/json:
             schema:
               type: object
-              example: &ref_2
-                uuid: 2d4283cc-f721-440a-b844-61373d78cc29
+              example: &ref_0
+                uuid: 3fd0ecde-c1f4-4555-8d8c-9482dfd187e3
                 nombre: cliente nombre
       responses:
         '200':
@@ -133,7 +44,7 @@ paths:
             application/json:
               schema:
                 type: object
-                example: *ref_2
+                example: *ref_0
   /api/Client/{uuid}:
     put:
       tags:
@@ -149,8 +60,8 @@ paths:
           application/json:
             schema:
               type: object
-              example: &ref_3
-                uuid: dd9b7858-86fe-458d-b9ab-d8993e2f2e7f
+              example: &ref_1
+                uuid: 0665b7bf-64d7-4b9b-b907-cb41e6bcd280
                 nombre: cliente nombre
       responses:
         '200':
@@ -158,7 +69,7 @@ paths:
             application/json:
               schema:
                 type: object
-                example: *ref_3
+                example: *ref_1
   /api/Client/filter?nombre={nombre}:
     get:
       tags:
@@ -176,31 +87,107 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 2d4283cc-f721-440a-b844-61373d78cc29
+                  - uuid: 045a351a-8cbf-4cb3-8ce1-7efc5a2c358e
                     nombre: cliente nombre
-                  - uuid: 3df7b3ac-6e90-474b-9f06-3b027416434e
+                  - uuid: 0665b7bf-64d7-4b9b-b907-cb41e6bcd280
                     nombre: cliente nombre
-                  - uuid: ab2f5c9d-2304-4340-bf2c-a3cd26358ea8
+                  - uuid: 1acf0233-5501-4ca8-ae01-25d1574e3c43
                     nombre: cliente nombre
-                  - uuid: dd9b7858-86fe-458d-b9ab-d8993e2f2e7f
+                  - uuid: 3fd0ecde-c1f4-4555-8d8c-9482dfd187e3
                     nombre: cliente nombre
+  /api/User:
+    get:
+      tags:
+        - User
+      parameters: []
+      requestBody: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - uuid: 0749c577-5734-44bd-ac13-5f3b142bd2ee
+                    nombre: usuario nombre
+                  - uuid: 81198636-14bb-4e36-94e2-2d71a75cd3e5
+                    nombre: usuario nombre
+                  - uuid: eccc2b2d-0e83-432b-8c4f-bee37ab8f7cc
+                    nombre: usuario nombre
+    post:
+      tags:
+        - User
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example: &ref_2
+                uuid: 54152f9e-c459-42a3-8835-911799e2cc31
+                nombre: usuario nombre
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                example: *ref_2
+  /api/User/{uuid}:
+    put:
+      tags:
+        - User
+      parameters:
+        - name: uuid
+          in: path
+          type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example: &ref_3
+                uuid: 81198636-14bb-4e36-94e2-2d71a75cd3e5
+                nombre: usuario nombre
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                example: *ref_3
+  /api/User/filter?nombre={nombre}:
+    get:
+      tags:
+        - User
+      parameters:
+        - name: nombre
+          in: path
+          type: string
+          required: false
+      requestBody: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - uuid: 0749c577-5734-44bd-ac13-5f3b142bd2ee
+                    nombre: usuario nombre
+                  - uuid: 54152f9e-c459-42a3-8835-911799e2cc31
+                    nombre: usuario nombre
+                  - uuid: 81198636-14bb-4e36-94e2-2d71a75cd3e5
+                    nombre: usuario nombre
+                  - uuid: eccc2b2d-0e83-432b-8c4f-bee37ab8f7cc
+                    nombre: usuario nombre
 components:
   parameters: {}
   definitions: {}
   schemas:
-    usuario:
-      type: object
-      properties:
-        uuid:
-          type: string
-          required: true
-          description: identificador universal unico para la tabal usuario
-          example: '3973'
-        nombre:
-          type: string
-          required: true
-          description: nombre de usuario
-          example: '3973'
     cliente:
       type: object
       properties:
@@ -214,6 +201,19 @@ components:
           required: true
           description: nombre del clinete
           example: '3973'
+    usuario:
+      type: object
+      properties:
+        uuid:
+          type: string
+          required: true
+          description: identificador universal unico para la tabal usuario
+          example: '3973'
+        nombre:
+          type: string
+          required: true
+          description: nombre de usuario
+          example: '3973'
   tags:
-    - User
     - Client
+    - User
