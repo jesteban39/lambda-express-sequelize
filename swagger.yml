@@ -191,12 +191,12 @@ components:
           type: string
           required: true
           description: identificador universal unico para la tabal usuario
-          example: '3973'
+          example: 893eb666-270f-491d-81d3-49dd9677534b
         nombre:
           type: string
           required: true
           description: nombre de usuario
-          example: '3973'
+          example: Esteban Quitero
     cliente:
       type: object
       properties:
@@ -204,12 +204,12 @@ components:
           type: string
           required: true
           description: identificador universal unico para la tabal cliente
-          example: '3973'
+          example: 3a50b4d1-fe97-406f-9acf-c4c1eec7bee9
         nombre:
           type: string
           required: true
           description: nombre del clinete
-          example: '3973'
+          example: cliente nombre
   tags:
     - User
     - Client

@@ -1,4 +1,4 @@
-import type {ModelStatic, Model} from 'sequelize'
+import type {ModelStatic, Model as Modeln} from 'sequelize'
 
 export type LambdaConfog = {
   method: string
@@ -17,6 +17,6 @@ export type LambdaResult = {
   data: any
 }
 
-export type Modeln = ModelStatic<Model<any, any>>
+export type Model = ModelStatic<Modeln<any, any>>
 
-export type Models = {[key: string]: Modeln}
+export type Models = {[key: string]: Model}

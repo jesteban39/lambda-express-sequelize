@@ -1,6 +1,5 @@
 import yaml from 'js-yaml'
 import fs from 'fs'
-import crypto from 'crypto'
 import {mekeSchema} from './mekeSchema'
 import type {ModelStatic, Model} from 'sequelize'
 import type {LambdaConfog, LambdaResult} from '../types'
@@ -36,39 +35,12 @@ export const saveSwagger = () => {
   fs.writeFileSync('./swagger.yml', yaml.dump(swaggerObject), 'utf8')
 }
 
-const mekeExample = (model: ModelStatic<Model<any, any>>) => {
-  const attributes = Object.entries(model.getAttributes())
-  return attributes.reduce((exp: any, [key, attribute]) => {
-    if (attribute.primaryKey) {
-      exp[key] = crypto.randomUUID()
-    } else if (attribute.defaultValue) exp[key] = attribute.defaultValue
-    else exp[key] = `${model.tableName} ${attribute.field?.replace(/_/g, ' ')}`
-    return exp
-  }, {})
-}
-
-const getExample = (model: ModelStatic<Model<any, any>>, exp: any) => {
-  if (!exp) exp = {}
-  if (!exp.list) exp.list = []
-  if (!exp.list[0]) exp.list[0] = mekeExample(model)
-  if (!exp.list[1]) exp.list[1] = mekeExample(model)
-  if (!exp.list[2]) exp.list[2] = mekeExample(model)
-  if (!exp.new) exp.new = mekeExample(model)
-  if (!exp.edit)
-    exp.edit = {
-      ...mekeExample(model),
-      uuid: exp.list[0].uuid
-    }
-  return exp
-}
-
 export const addModels = (models: ModelStatic<Model<any, any>>[], examples: any) => {
-  return models.reduce((exp, model) => {
-    swaggerObject.components.schemas[model.tableName] = mekeSchema(model)
+  return models.forEach((model) => {
+    const schema = mekeSchema(model, examples[model.name].new)
+    swaggerObject.components.schemas[model.tableName] = schema
     swaggerObject.components.tags.push(model.name)
-    exp[model.name] = getExample(model, {...exp?.[model.name]})
-    return exp
-  }, examples)
+  })
 }
 
 export const addRoute = (action: LambdaConfog, res: LambdaResult) => {

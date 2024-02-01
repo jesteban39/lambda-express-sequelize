@@ -1,6 +1,6 @@
 import fs from 'fs'
-import examples from './examples.json'
 import {handler} from '@src/lambda'
+import {getExamples} from './examples'
 import agent from './agent'
 import {addModels, saveSwagger} from './swagger'
 import db from '@db'
@@ -94,7 +94,9 @@ const testModel = (modelName: string) => {
 describe('Tests for CRUD', () => {
   beforeAll(async () => {
     const seq = await db.open()
-    exp = addModels(Object.values(seq.models), examples)
+    const models = Object.values(seq.models)
+    exp = getExamples(models)
+    addModels(models, exp)
     await seq.sync({force: true})
     await db.close()
   })

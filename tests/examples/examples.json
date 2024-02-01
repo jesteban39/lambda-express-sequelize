@@ -1,0 +1,20 @@
+{
+  "User": {
+    "list": [
+      {"uuid": "60d8431e-78be-434d-b8e0-0bf4f9726bab", "nombre": "usuario nombre"},
+      {"uuid": "8d3dc470-0dd6-4c78-acea-8e0da01e8463", "nombre": "usuario nombre"},
+      {"uuid": "076870fa-3764-48ed-a833-2e32d6689e6d", "nombre": "usuario nombre"}
+    ],
+    "new": {"uuid": "893eb666-270f-491d-81d3-49dd9677534b", "nombre": "Esteban Quitero"},
+    "edit": {"uuid": "60d8431e-78be-434d-b8e0-0bf4f9726bab", "nombre": "Emily Quintero"}
+  },
+  "Client": {
+    "list": [
+      {"uuid": "b67b1061-a26e-4516-899f-068b07d35d2e", "nombre": "cliente nombre"},
+      {"uuid": "cd66c765-3452-4eb9-b752-ace15096ab41", "nombre": "cliente nombre"},
+      {"uuid": "53d9c7c3-4cce-4d1a-b74b-b969f3279aa0", "nombre": "cliente nombre"}
+    ],
+    "new": {"uuid": "3a50b4d1-fe97-406f-9acf-c4c1eec7bee9", "nombre": "cliente nombre"},
+    "edit": {"uuid": "b67b1061-a26e-4516-899f-068b07d35d2e", "nombre": "cliente nombre"}
+  }
+}

@@ -23,7 +23,7 @@ const getTypeOf = (
   return ['', 0]
 }
 
-export const mekeSchema = (model: ModelStatic<Model<any, any>>) => {
+export const mekeSchema = (model: ModelStatic<Model<any, any>>, example: any) => {
   return {
     type: 'object',
     properties: Object.entries(model.getAttributes()).reduce(
@@ -34,7 +34,7 @@ export const mekeSchema = (model: ModelStatic<Model<any, any>>) => {
           description:
             atribute.comment ??
             `${model.tableName} ${atribute.field?.replace(/_/g, ' ')}`,
-          example: '3973'
+          example: example[key]
         }
         return properties
       },
