@@ -19,12 +19,12 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 0f10327e-7e2e-4532-844a-013fdd6159c6
-                    nombre: usuario nombre
-                  - uuid: 6f485f6a-bc28-4f53-aa58-88932799411f
-                    nombre: usuario nombre
-                  - uuid: be4f667a-3a50-4a81-bc44-02136f3306a6
-                    nombre: usuario nombre
+                  - uuid: 53d9c7c3-4cce-4d1a-b74b-b969f3279aa0
+                    nombre: cliente nombre
+                  - uuid: b67b1061-a26e-4516-899f-068b07d35d2e
+                    nombre: cliente nombre
+                  - uuid: cd66c765-3452-4eb9-b752-ace15096ab41
+                    nombre: cliente nombre
     post:
       tags:
         - Client
@@ -36,8 +36,8 @@ paths:
             schema:
               type: object
               example: &ref_0
-                uuid: 1eb2a7df-9267-46cc-9b0b-354b3c784dfb
-                nombre: usuario nombre
+                uuid: 3a50b4d1-fe97-406f-9acf-c4c1eec7bee9
+                nombre: cliente nombre
       responses:
         '200':
           content:
@@ -61,8 +61,8 @@ paths:
             schema:
               type: object
               example: &ref_1
-                uuid: be4f667a-3a50-4a81-bc44-02136f3306a6
-                nombre: usuario nombre
+                uuid: b67b1061-a26e-4516-899f-068b07d35d2e
+                nombre: cliente nombre
       responses:
         '200':
           content:
@@ -87,14 +87,14 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 0f10327e-7e2e-4532-844a-013fdd6159c6
-                    nombre: usuario nombre
-                  - uuid: 1eb2a7df-9267-46cc-9b0b-354b3c784dfb
-                    nombre: usuario nombre
-                  - uuid: 6f485f6a-bc28-4f53-aa58-88932799411f
-                    nombre: usuario nombre
-                  - uuid: be4f667a-3a50-4a81-bc44-02136f3306a6
-                    nombre: usuario nombre
+                  - uuid: 3a50b4d1-fe97-406f-9acf-c4c1eec7bee9
+                    nombre: cliente nombre
+                  - uuid: 53d9c7c3-4cce-4d1a-b74b-b969f3279aa0
+                    nombre: cliente nombre
+                  - uuid: b67b1061-a26e-4516-899f-068b07d35d2e
+                    nombre: cliente nombre
+                  - uuid: cd66c765-3452-4eb9-b752-ace15096ab41
+                    nombre: cliente nombre
   /api/User:
     get:
       tags:
@@ -108,11 +108,11 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 0f10327e-7e2e-4532-844a-013fdd6159c6
+                  - uuid: 076870fa-3764-48ed-a833-2e32d6689e6d
                     nombre: usuario nombre
-                  - uuid: 6f485f6a-bc28-4f53-aa58-88932799411f
+                  - uuid: 60d8431e-78be-434d-b8e0-0bf4f9726bab
                     nombre: usuario nombre
-                  - uuid: be4f667a-3a50-4a81-bc44-02136f3306a6
+                  - uuid: 8d3dc470-0dd6-4c78-acea-8e0da01e8463
                     nombre: usuario nombre
     post:
       tags:
@@ -125,8 +125,8 @@ paths:
             schema:
               type: object
               example: &ref_2
-                uuid: 1eb2a7df-9267-46cc-9b0b-354b3c784dfb
-                nombre: usuario nombre
+                uuid: 893eb666-270f-491d-81d3-49dd9677534b
+                nombre: Esteban Quitero
       responses:
         '200':
           content:
@@ -150,8 +150,8 @@ paths:
             schema:
               type: object
               example: &ref_3
-                uuid: be4f667a-3a50-4a81-bc44-02136f3306a6
-                nombre: usuario nombre
+                uuid: 60d8431e-78be-434d-b8e0-0bf4f9726bab
+                nombre: Emily Quintero
       responses:
         '200':
           content:
@@ -176,13 +176,9 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 0f10327e-7e2e-4532-844a-013fdd6159c6
+                  - uuid: 076870fa-3764-48ed-a833-2e32d6689e6d
                     nombre: usuario nombre
-                  - uuid: 1eb2a7df-9267-46cc-9b0b-354b3c784dfb
-                    nombre: usuario nombre
-                  - uuid: 6f485f6a-bc28-4f53-aa58-88932799411f
-                    nombre: usuario nombre
-                  - uuid: be4f667a-3a50-4a81-bc44-02136f3306a6
+                  - uuid: 8d3dc470-0dd6-4c78-acea-8e0da01e8463
                     nombre: usuario nombre
 components:
   parameters: {}

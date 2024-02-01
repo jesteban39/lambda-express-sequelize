@@ -1,6 +1,6 @@
 import fs from 'fs'
-import {handler} from '@src/lambda'
 import examples from './examples.json'
+import {handler} from '@src/lambda'
 import agent from './agent'
 import {addModels, saveSwagger} from './swagger'
 import db from '@db'

@@ -14,9 +14,6 @@ export interface Parameters {
   required: boolean
 }
 
-
-let exp: any = {}
-
 let swaggerObject: any = {
   openapi: '3.0.0',
   info: {
@@ -65,17 +62,14 @@ const getExample = (model: ModelStatic<Model<any, any>>, exp: any) => {
   return exp
 }
 
-
-
-export const addModels = (models: ModelStatic<Model<any, any>>[], exps: any) => {
-  models.forEach((model) => {
+export const addModels = (models: ModelStatic<Model<any, any>>[], examples: any) => {
+  return models.reduce((exp, model) => {
     swaggerObject.components.schemas[model.tableName] = mekeSchema(model)
     swaggerObject.components.tags.push(model.name)
-    exp[model.name] = getExample(model, exps)
-  })
-  return exp
+    exp[model.name] = getExample(model, {...exp?.[model.name]})
+    return exp
+  }, examples)
 }
-
 
 export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
   const {url, parameters} = getParameters(action)
