@@ -1,13 +1,14 @@
 import fs from 'fs'
 import {handler} from '@src/lambda'
+import examples from './examples.json'
 import agent from './agent'
-import {addModel, saveSwagger} from './swagger'
+import {addModels, saveSwagger} from './swagger'
 import db from '@db'
 
+const PATH_MODELS = './src/database/models'
 const lambda = agent(handler)
-let examples: any = {}
-const directorio = './src/database/models'
-const folders = fs.readdirSync(directorio)
+let exp: any = {}
+const filesModel = fs.readdirSync(PATH_MODELS)
 
 const testModel = (modelName: string) => {
   describe(`Routes for model ${modelName}`, () => {
@@ -15,8 +16,7 @@ const testModel = (modelName: string) => {
       await db.open()
       const Model = db.getModels()[modelName]
       await Model.sync({force: true})
-      examples = addModel(Model)
-      await Model.bulkCreate(examples[modelName].list)
+      await Model.bulkCreate(exp[modelName].list)
       await db.close()
     })
 
@@ -34,11 +34,11 @@ const testModel = (modelName: string) => {
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
       expect(Array.isArray(data)).toBe(true)
-      expect(data.length).toBe(examples[modelName].list.length)
+      expect(data.length).toBe(exp[modelName].list.length)
     })
 
     test(`POST: '/api/${modelName}'`, async () => {
-      const newElement = examples[modelName].new
+      const newElement = exp[modelName].new
       const config = {
         method: 'POST',
         path: `/api/${modelName}`,
@@ -55,7 +55,7 @@ const testModel = (modelName: string) => {
     })
 
     test(`PUT: '/api/${modelName}'`, async () => {
-      const editElement = examples[modelName].edit
+      const editElement = exp[modelName].edit
       const config = {
         method: 'PUT',
         path: `/api/${modelName}/:uuid`,
@@ -72,7 +72,7 @@ const testModel = (modelName: string) => {
     })
 
     test(`GET: '/api/${modelName}/filter'`, async () => {
-      const newElement = examples[modelName].list[1]
+      const newElement = exp[modelName].list[1]
       const config = {
         method: 'GET',
         path: `/api/${modelName}/filter`,
@@ -94,18 +94,22 @@ const testModel = (modelName: string) => {
 describe('Tests for CRUD', () => {
   beforeAll(async () => {
     const seq = await db.open()
+    exp = addModels(Object.values(seq.models), examples)
     await seq.sync({force: true})
     await db.close()
   })
 
-  afterAll(saveSwagger)
-
-  folders.forEach((file) => {
-    const path = directorio + '/' + file
+  filesModel.forEach((file) => {
+    const path = PATH_MODELS + '/' + file
     const stats = fs.statSync(path)
     if (stats.isFile()) {
-      const modelName = file.charAt(0).toUpperCase() + file.slice(1).replace('.ts', '')
+      const modelName = file[0].toUpperCase() + file.slice(1).replace('.ts', '')
       testModel(modelName)
     }
+  })
+
+  afterAll(() => {
+    saveSwagger()
+    fs.writeFileSync('./tests/examples.json', JSON.stringify(exp), 'utf8')
   })
 })

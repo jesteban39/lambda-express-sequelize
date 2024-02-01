@@ -2,13 +2,20 @@ import yaml from 'js-yaml'
 import fs from 'fs'
 import crypto from 'crypto'
 import {mekeSchema} from './mekeSchema'
-import examples from '../examples.json'
 import type {ModelStatic, Model} from 'sequelize'
 import type {LambdaConfog, LambdaResult} from '../types'
 
 export type Models = {[key: string]: ModelStatic<Model<any, any>>}
 
-let exaples: any = {}
+export interface Parameters {
+  name: string
+  in: string
+  type: string
+  required: boolean
+}
+
+
+let exp: any = {}
 
 let swaggerObject: any = {
   openapi: '3.0.0',
@@ -30,7 +37,6 @@ let swaggerObject: any = {
 export const saveSwagger = () => {
   fs.writeFileSync('./swagger.json', JSON.stringify(swaggerObject), 'utf8')
   fs.writeFileSync('./swagger.yml', yaml.dump(swaggerObject), 'utf8')
-  fs.writeFileSync('./tests/examples.json', JSON.stringify(exaples), 'utf8')
 }
 
 const mekeExample = (model: ModelStatic<Model<any, any>>) => {
@@ -44,34 +50,32 @@ const mekeExample = (model: ModelStatic<Model<any, any>>) => {
   }, {})
 }
 
-const mekeExamples = (exp: any, model: ModelStatic<Model<any, any>>) => {
-  if (!exp[model.name]) exp[model.name] = {}
-  if (!exp[model.name].list) exp[model.name].list = []
-  if (!exp[model.name].list[0]) exp[model.name].list[0] = mekeExample(model)
-  if (!exp[model.name].list[1]) exp[model.name].list[1] = mekeExample(model)
-  if (!exp[model.name].list[2]) exp[model.name].list[2] = mekeExample(model)
-  if (!exp[model.name].new) exp[model.name].new = mekeExample(model)
-  if (!exp[model.name].edit)
-    exp[model.name].edit = {
+const getExample = (model: ModelStatic<Model<any, any>>, exp: any) => {
+  if (!exp) exp = {}
+  if (!exp.list) exp.list = []
+  if (!exp.list[0]) exp.list[0] = mekeExample(model)
+  if (!exp.list[1]) exp.list[1] = mekeExample(model)
+  if (!exp.list[2]) exp.list[2] = mekeExample(model)
+  if (!exp.new) exp.new = mekeExample(model)
+  if (!exp.edit)
+    exp.edit = {
       ...mekeExample(model),
-      uuid: exp[model.name].list[0].uuid
+      uuid: exp.list[0].uuid
     }
-  exaples = exp
   return exp
 }
 
-export const addModel = (model: ModelStatic<Model<any, any>>) => {
-  swaggerObject.components.schemas[model.tableName] = mekeSchema(model)
-  swaggerObject.components.tags.push(model.name)
-  return mekeExamples(examples, model)
+
+
+export const addModels = (models: ModelStatic<Model<any, any>>[], exps: any) => {
+  models.forEach((model) => {
+    swaggerObject.components.schemas[model.tableName] = mekeSchema(model)
+    swaggerObject.components.tags.push(model.name)
+    exp[model.name] = getExample(model, exps)
+  })
+  return exp
 }
 
-export interface Parameters {
-  name: string
-  in: string
-  type: string
-  required: boolean
-}
 
 export const addRoute = (action: LambdaConfog, res: LambdaResult) => {
   const {url, parameters} = getParameters(action)

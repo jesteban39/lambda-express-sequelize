@@ -1,20 +1,20 @@
 {
-  "Client": {
-    "list": [
-      {"uuid": "0665b7bf-64d7-4b9b-b907-cb41e6bcd280", "nombre": "cliente nombre"},
-      {"uuid": "1acf0233-5501-4ca8-ae01-25d1574e3c43", "nombre": "cliente nombre"},
-      {"uuid": "045a351a-8cbf-4cb3-8ce1-7efc5a2c358e", "nombre": "cliente nombre"}
-    ],
-    "new": {"uuid": "3fd0ecde-c1f4-4555-8d8c-9482dfd187e3", "nombre": "cliente nombre"},
-    "edit": {"uuid": "0665b7bf-64d7-4b9b-b907-cb41e6bcd280", "nombre": "cliente nombre"}
-  },
   "User": {
     "list": [
-      {"uuid": "81198636-14bb-4e36-94e2-2d71a75cd3e5", "nombre": "usuario nombre"},
-      {"uuid": "eccc2b2d-0e83-432b-8c4f-bee37ab8f7cc", "nombre": "usuario nombre"},
-      {"uuid": "0749c577-5734-44bd-ac13-5f3b142bd2ee", "nombre": "usuario nombre"}
+      {"uuid": "be4f667a-3a50-4a81-bc44-02136f3306a6", "nombre": "usuario nombre"},
+      {"uuid": "0f10327e-7e2e-4532-844a-013fdd6159c6", "nombre": "usuario nombre"},
+      {"uuid": "6f485f6a-bc28-4f53-aa58-88932799411f", "nombre": "usuario nombre"}
     ],
-    "new": {"uuid": "54152f9e-c459-42a3-8835-911799e2cc31", "nombre": "usuario nombre"},
-    "edit": {"uuid": "81198636-14bb-4e36-94e2-2d71a75cd3e5", "nombre": "usuario nombre"}
+    "new": {"uuid": "1eb2a7df-9267-46cc-9b0b-354b3c784dfb", "nombre": "usuario nombre"},
+    "edit": {"uuid": "be4f667a-3a50-4a81-bc44-02136f3306a6", "nombre": "usuario nombre"}
+  },
+  "Client": {
+    "list": [
+      {"uuid": "be4f667a-3a50-4a81-bc44-02136f3306a6", "nombre": "usuario nombre"},
+      {"uuid": "0f10327e-7e2e-4532-844a-013fdd6159c6", "nombre": "usuario nombre"},
+      {"uuid": "6f485f6a-bc28-4f53-aa58-88932799411f", "nombre": "usuario nombre"}
+    ],
+    "new": {"uuid": "1eb2a7df-9267-46cc-9b0b-354b3c784dfb", "nombre": "usuario nombre"},
+    "edit": {"uuid": "be4f667a-3a50-4a81-bc44-02136f3306a6", "nombre": "usuario nombre"}
   }
 }
