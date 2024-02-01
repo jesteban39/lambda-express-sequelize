@@ -19,12 +19,12 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 520d1ddd-039
-                    nombre: nombre User usuario
-                  - uuid: 520d1ddd-040
-                    nombre: nombre User usuario
-                  - uuid: 520d1ddd-041
-                    nombre: nombre User usuario
+                  - uuid: 5aef01b3-e75b-4d8b-8992-133b41fa4a13
+                    nombre: usuario nombre
+                  - uuid: bd2f5adf-8820-4395-af04-190cbf067441
+                    nombre: usuario nombre
+                  - uuid: fbf17a72-7971-44fc-bf5d-f74e11032264
+                    nombre: usuario nombre
     post:
       tags:
         - User
@@ -36,8 +36,8 @@ paths:
             schema:
               type: object
               example: &ref_0
-                uuid: 520d1ddd-042
-                nombre: nombre User usuario
+                uuid: 8d85f842-1e6e-4829-97fc-f852dff7a5c6
+                nombre: usuario nombre
       responses:
         '200':
           content:
@@ -61,8 +61,8 @@ paths:
             schema:
               type: object
               example: &ref_1
-                uuid: 520d1ddd-039
-                nombre: nuevo nombre usuario
+                uuid: bd2f5adf-8820-4395-af04-190cbf067441
+                nombre: usuario nombre
       responses:
         '200':
           content:
@@ -87,12 +87,14 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 520d1ddd-040
-                    nombre: nombre User usuario
-                  - uuid: 520d1ddd-041
-                    nombre: nombre User usuario
-                  - uuid: 520d1ddd-042
-                    nombre: nombre User usuario
+                  - uuid: 5aef01b3-e75b-4d8b-8992-133b41fa4a13
+                    nombre: usuario nombre
+                  - uuid: 8d85f842-1e6e-4829-97fc-f852dff7a5c6
+                    nombre: usuario nombre
+                  - uuid: bd2f5adf-8820-4395-af04-190cbf067441
+                    nombre: usuario nombre
+                  - uuid: fbf17a72-7971-44fc-bf5d-f74e11032264
+                    nombre: usuario nombre
   /api/Client:
     get:
       tags:
@@ -106,11 +108,11 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 15b781bf-fa91-47b0-acb1-9a042170693d
+                  - uuid: 3df7b3ac-6e90-474b-9f06-3b027416434e
                     nombre: cliente nombre
-                  - uuid: b2c3f79a-1dbd-44c7-ae82-69868c0f762b
+                  - uuid: ab2f5c9d-2304-4340-bf2c-a3cd26358ea8
                     nombre: cliente nombre
-                  - uuid: e5d249c5-99a9-4a1d-baa3-b85484ac86e5
+                  - uuid: dd9b7858-86fe-458d-b9ab-d8993e2f2e7f
                     nombre: cliente nombre
     post:
       tags:
@@ -123,7 +125,7 @@ paths:
             schema:
               type: object
               example: &ref_2
-                uuid: 4bcf14e9-1450-46b1-a9d0-d341cdc6bf2c
+                uuid: 2d4283cc-f721-440a-b844-61373d78cc29
                 nombre: cliente nombre
       responses:
         '200':
@@ -148,7 +150,7 @@ paths:
             schema:
               type: object
               example: &ref_3
-                uuid: 15b781bf-fa91-47b0-acb1-9a042170693d
+                uuid: dd9b7858-86fe-458d-b9ab-d8993e2f2e7f
                 nombre: cliente nombre
       responses:
         '200':
@@ -174,13 +176,13 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 15b781bf-fa91-47b0-acb1-9a042170693d
+                  - uuid: 2d4283cc-f721-440a-b844-61373d78cc29
                     nombre: cliente nombre
-                  - uuid: 4bcf14e9-1450-46b1-a9d0-d341cdc6bf2c
+                  - uuid: 3df7b3ac-6e90-474b-9f06-3b027416434e
                     nombre: cliente nombre
-                  - uuid: b2c3f79a-1dbd-44c7-ae82-69868c0f762b
+                  - uuid: ab2f5c9d-2304-4340-bf2c-a3cd26358ea8
                     nombre: cliente nombre
-                  - uuid: e5d249c5-99a9-4a1d-baa3-b85484ac86e5
+                  - uuid: dd9b7858-86fe-458d-b9ab-d8993e2f2e7f
                     nombre: cliente nombre
 components:
   parameters: {}

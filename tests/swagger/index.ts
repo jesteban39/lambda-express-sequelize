@@ -2,14 +2,13 @@ import yaml from 'js-yaml'
 import fs from 'fs'
 import crypto from 'crypto'
 import {mekeSchema} from './mekeSchema'
-import {getTypeExp} from './typeSw'
 import examples from '../examples.json'
 import type {ModelStatic, Model} from 'sequelize'
 import type {LambdaConfog, LambdaResult} from '../types'
 
 export type Models = {[key: string]: ModelStatic<Model<any, any>>}
 
-let exp: any = {}
+let exaples: any = {}
 
 let swaggerObject: any = {
   openapi: '3.0.0',
@@ -31,26 +30,16 @@ let swaggerObject: any = {
 export const saveSwagger = () => {
   fs.writeFileSync('./swagger.json', JSON.stringify(swaggerObject), 'utf8')
   fs.writeFileSync('./swagger.yml', yaml.dump(swaggerObject), 'utf8')
-  fs.writeFileSync('./tests/examples.json', JSON.stringify(exp), 'utf8')
+  fs.writeFileSync('./tests/examples.json', JSON.stringify(exaples), 'utf8')
 }
 
 const mekeExample = (model: ModelStatic<Model<any, any>>) => {
   const attributes = Object.entries(model.getAttributes())
   return attributes.reduce((exp: any, [key, attribute]) => {
-    const typeS = getTypeExp(attribute)
-    let value
-    if (attribute.primaryKey) value = crypto.randomUUID()
-    else if (attribute.defaultValue) value = attribute.defaultValue
-    else value = `${model.tableName} ${attribute.field?.replace(/_/g, ' ')}`
-    
-    exp[key] = value
-    const r = {
-      type: typeS,
-      required: attribute.allowNull !== true,
-      description:
-        attribute.comment ?? `${model.tableName} ${attribute.field?.replace(/_/g, ' ')}`,
-      example: '3973'
-    }
+    if (attribute.primaryKey) {
+      exp[key] = crypto.randomUUID()
+    } else if (attribute.defaultValue) exp[key] = attribute.defaultValue
+    else exp[key] = `${model.tableName} ${attribute.field?.replace(/_/g, ' ')}`
     return exp
   }, {})
 }
@@ -67,6 +56,7 @@ const mekeExamples = (exp: any, model: ModelStatic<Model<any, any>>) => {
       ...mekeExample(model),
       uuid: exp[model.name].list[0].uuid
     }
+  exaples = exp
   return exp
 }
 

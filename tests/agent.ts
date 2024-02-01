@@ -5,7 +5,6 @@ import type {APIGatewayProxyHandler} from 'aws-lambda'
 let lambda = <APIGatewayProxyHandler | null>null
 
 const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
-  console.log(action)
   const {body, headers, params, querys, path, method} = action
   if (!lambda) throw Error('No se ha llamado a agent')
   const url = Object.entries(params).reduce(
