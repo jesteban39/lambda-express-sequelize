@@ -112,6 +112,5 @@ describe('Tests for CRUD', () => {
 
   afterAll(() => {
     saveSwagger()
-    fs.writeFileSync('./tests/examples.json', JSON.stringify(exp), 'utf8')
   })
 })

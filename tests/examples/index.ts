@@ -1,3 +1,4 @@
+import fs from 'fs'
 import crypto from 'crypto'
 import examples from './examples.json'
 import type {Model} from '../types'
@@ -29,9 +30,10 @@ const getExample = (model: Model, exp: any) => {
 }
 
 export const getExamples = (models: Model[]) => {
-    return examples
-  return models.reduce((exps, model) => {
+  const expls = models.reduce((exps, model) => {
     exps[model.name] = getExample(model, {...exps?.[model.name]})
     return exps
   }, examples as any)
+  fs.writeFileSync('./tests/examples/examples.json', JSON.stringify(expls), 'utf8')
+  return expls
 }
