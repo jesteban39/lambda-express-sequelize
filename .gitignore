@@ -13,8 +13,7 @@ lerna-debug.log*
 *.pem
 
 #variables de entorno
-**/env
-**/.env**
+.env
 
 # modele
 node_modules
