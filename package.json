@@ -4,10 +4,9 @@
   "description": "Backend para servicios de TI",
   "main": "dis/src/index.js",
   "scripts": {
-    "start": "serverless offline",
     "deploy": "serverless deploy",
     "test": "jest --coverage",
-    "dev": "ts-node --files -r tsconfig-paths/register ./src",
+    "dev": "serverless offline",
     "commit": "git add . && cat > commit.txt && git commit -F commit.txt && rm -rf commit.txt && git push"
   },
   "keywords": [],
@@ -15,10 +14,10 @@
   "nodemonConfig": {
     "watch": [
       "src",
-      "swagger.json"
+      "tests"
     ],
     "ext": "ts",
-    "exec": "ts-node --files -r tsconfig-paths/register ./src"
+    "exec": "jest && ts-node --files -r tsconfig-paths/register ./src"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",

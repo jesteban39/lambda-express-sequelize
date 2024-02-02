@@ -121,7 +121,7 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
     data: await JSON.parse(res?.body),
     headers: res.headers ?? {}
   }
-  addRoute(action, response)
+    addRoute(action, response)
   return response
 }
 
