@@ -7,7 +7,7 @@
     "deploy": "serverless deploy",
     "test": "jest --coverage",
     "dev": "serverless offline",
-    "commit": "git add . && cat > commit.txt && git commit -F commit.txt && rm -rf commit.txt && git push"
+    "commit": "git add . && cat > commit.txt && git commit -F commit.txt && rm -rf commit.txt"
   },
   "keywords": [],
   "author": "",
