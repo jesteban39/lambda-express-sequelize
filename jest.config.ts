@@ -8,6 +8,7 @@ const jestConfig: Config.InitialOptions = {
   detectOpenHandles: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
+  setupFiles: ['./jest.setup.ts'],
   testRegex: '/tests/.+\\.test\\.ts$',
   testPathIgnorePatterns: ['dist/', 'node_modules/','coverage/'],
   modulePaths: [compilerOptions.baseUrl],

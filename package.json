@@ -14,14 +14,15 @@
   "author": "",
   "nodemonConfig": {
     "watch": [
-      "src", "swagger.json"
+      "src",
+      "swagger.json"
     ],
     "ext": "ts",
     "exec": "ts-node --files -r tsconfig-paths/register ./src"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "helmet": "^7.0.0",
