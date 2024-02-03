@@ -8,6 +8,6 @@ export const router = Router()
 // router.use('/Client', clientRoutes)
 // router.use('/User', userRoutes)
 
-router.use('/',crudRoutes)
+router.use('/', crudRoutes)
 
 export default router
