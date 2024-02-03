@@ -10,7 +10,7 @@ const jestConfig: Config.InitialOptions = {
   testEnvironment: 'node',
   setupFiles: ['./jest.setup.ts'],
   testRegex: '/tests/.+\\.test\\.ts$',
-  testPathIgnorePatterns: ['dist/', 'node_modules/','coverage/'],
+  testPathIgnorePatterns: ['dist/', 'node_modules/', 'coverage/'],
   modulePaths: [compilerOptions.baseUrl],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths)
 }

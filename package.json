@@ -2,24 +2,16 @@
   "name": "lambda-express-sequelize",
   "version": "1.0.0",
   "description": "Backend para servicios de TI",
-  "main": "dis/src/index.js",
+  "main": "src/index.js",
   "scripts": {
     "deploy": "serverless deploy",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "dev": "cross-env NODE_ENV=dev serverless offline",
-    "format": "prettier --write \"{src,tests}/**/*.{js,jsx,ts,tsx}\"",
+    "format": "prettier . --write",
     "commit": "git add . && cat > commit.txt && git commit -F commit.txt && rm -rf commit.txt && git push"
   },
   "keywords": [],
   "author": "",
-  "nodemonConfig": {
-    "watch": [
-      "src",
-      "tests"
-    ],
-    "ext": "ts",
-    "exec": "cross-env NODE_ENV=dev ts-node --files -r tsconfig-paths/register ./src"
-  },
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.1",
@@ -56,5 +48,16 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^4.6.3"
+  },
+  "pre-commit": [
+    "format"
+  ],
+  "nodemonConfig": {
+    "watch": [
+      "src",
+      "tests"
+    ],
+    "ext": "ts",
+    "exec": "cross-env NODE_ENV=dev ts-node --files -r tsconfig-paths/register ./src"
   }
 }
