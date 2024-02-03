@@ -1,6 +1,14 @@
 import env from 'dotenv'
+import path from 'path'
 
-env.config()
+const nodeEnv = process.env.NODE_ENV ?? 'production'
+
+env.config({
+  path: path.resolve(
+    process.cwd(),
+    nodeEnv === 'production' ? '.env' : `.env.${process.env.NODE_ENV}`
+  )
+})
 
 export default {
   nodeEnv: process.env.NODE_ENV ?? 'production',
