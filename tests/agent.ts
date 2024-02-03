@@ -51,7 +51,7 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
         requestTimeEpoch: 1,
         resourceId: '',
         operationName: undefined,
-        time: Date.now().toLocaleString(), 
+        time: Date.now().toLocaleString(),
         timeEpoch: Date.now(),
         identity: {
           accessKey: null,
@@ -121,7 +121,7 @@ const spy = async (action: LambdaConfog): Promise<LambdaResult> => {
     data: await JSON.parse(res?.body),
     headers: res.headers ?? {}
   }
-    addRoute(action, response)
+  addRoute(action, response)
   return response
 }
 
