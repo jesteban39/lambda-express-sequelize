@@ -1,4 +1,0 @@
-# Ignore artifacts:
-.esbuild
-coverage
-node_modules
