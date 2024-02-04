@@ -11,7 +11,7 @@ env.config({
 })
 
 export default {
-  nodeEnv: process.env.NODE_ENV ?? 'production',
+  nodeEnv: process.env.NODE_ENV ?? nodeEnv,
   host: process.env.DOMAIN ?? '',
   port: Number(process.env.PORT ?? 0),
   dbName: process.env.DB_NAME ?? '',

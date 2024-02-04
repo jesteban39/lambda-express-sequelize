@@ -34,6 +34,6 @@ export const getExamples = (models: Model[]) => {
     exps[model.name] = getExample(model, {...exps?.[model.name]})
     return exps
   }, examples as any)
-  fs.writeFileSync('./tests/examples/examples.json', JSON.stringify(expls), 'utf8')
+  //fs.writeFileSync('./tests/examples/examples.json', JSON.stringify(expls), 'utf8')
   return expls
 }

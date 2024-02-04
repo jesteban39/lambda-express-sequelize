@@ -110,7 +110,5 @@ describe('Tests for CRUD', () => {
     }
   })
 
-  afterAll(() => {
-    saveSwagger()
-  })
+  afterAll(saveSwagger)
 })
