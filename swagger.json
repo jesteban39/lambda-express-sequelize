@@ -20,15 +20,15 @@
                   "type": "array",
                   "example": [
                     {
-                      "uuid": "2cbe2738-ae6b-466b-b09a-4fd4a4d4fdde",
+                      "uuid": "08e78901-9cb6-4dcb-af06-3b342f2b90a4",
                       "nombre": "cliente nombre"
                     },
                     {
-                      "uuid": "4f32f432-021d-4165-b235-ab2e068aec32",
+                      "uuid": "16e30d77-d81b-4d8a-a951-555276e92e15",
                       "nombre": "cliente nombre"
                     },
                     {
-                      "uuid": "fff8ace3-efb2-42dd-b7ef-3f31de5b56aa",
+                      "uuid": "6e29f58a-ae13-4c5e-801c-196b5e82494b",
                       "nombre": "cliente nombre"
                     }
                   ]
@@ -48,7 +48,7 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "uuid": "29f32641-565c-419d-80a1-3ed9005d5c4a",
+                  "uuid": "c63e0bd3-cbd9-450a-b5dc-9d98c5d5544e",
                   "nombre": "cliente nombre"
                 }
               }
@@ -62,7 +62,7 @@
                 "schema": {
                   "type": "object",
                   "example": {
-                    "uuid": "29f32641-565c-419d-80a1-3ed9005d5c4a",
+                    "uuid": "c63e0bd3-cbd9-450a-b5dc-9d98c5d5544e",
                     "nombre": "cliente nombre"
                   }
                 }
@@ -85,7 +85,7 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "uuid": "fff8ace3-efb2-42dd-b7ef-3f31de5b56aa",
+                  "uuid": "08e78901-9cb6-4dcb-af06-3b342f2b90a4",
                   "nombre": "cliente nombre"
                 }
               }
@@ -99,7 +99,7 @@
                 "schema": {
                   "type": "object",
                   "example": {
-                    "uuid": "fff8ace3-efb2-42dd-b7ef-3f31de5b56aa",
+                    "uuid": "08e78901-9cb6-4dcb-af06-3b342f2b90a4",
                     "nombre": "cliente nombre"
                   }
                 }
@@ -124,19 +124,19 @@
                   "type": "array",
                   "example": [
                     {
-                      "uuid": "29f32641-565c-419d-80a1-3ed9005d5c4a",
+                      "uuid": "08e78901-9cb6-4dcb-af06-3b342f2b90a4",
                       "nombre": "cliente nombre"
                     },
                     {
-                      "uuid": "2cbe2738-ae6b-466b-b09a-4fd4a4d4fdde",
+                      "uuid": "16e30d77-d81b-4d8a-a951-555276e92e15",
                       "nombre": "cliente nombre"
                     },
                     {
-                      "uuid": "4f32f432-021d-4165-b235-ab2e068aec32",
+                      "uuid": "6e29f58a-ae13-4c5e-801c-196b5e82494b",
                       "nombre": "cliente nombre"
                     },
                     {
-                      "uuid": "fff8ace3-efb2-42dd-b7ef-3f31de5b56aa",
+                      "uuid": "c63e0bd3-cbd9-450a-b5dc-9d98c5d5544e",
                       "nombre": "cliente nombre"
                     }
                   ]
@@ -308,7 +308,7 @@
             "type": "string",
             "required": true,
             "description": "identificador universal unico para la tabal cliente",
-            "example": "29f32641-565c-419d-80a1-3ed9005d5c4a"
+            "example": "c63e0bd3-cbd9-450a-b5dc-9d98c5d5544e"
           },
           "nombre": {
             "type": "string",

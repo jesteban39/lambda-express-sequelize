@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "deploy": "serverless deploy",
-    "test": "npm run format",
+    "test": "jest --coverage && npm run format",
     "test-w": "jest --watch -o",
     "dev": "cross-env NODE_ENV=dev serverless offline",
     "format": "prettier --write \"*.{ts,json}\"  \"{src,tests}/**/*.{ts,json}\" && git add swagger.* tests/**/examples.json",
