@@ -7,14 +7,5 @@
     ],
     "new": {"uuid": "893eb666-270f-491d-81d3-49dd9677534b", "nombre": "Esteban Quitero"},
     "edit": {"uuid": "60d8431e-78be-434d-b8e0-0bf4f9726bab", "nombre": "Emily Quintero"}
-  },
-  "Client": {
-    "list": [
-      {"uuid": "fff8ace3-efb2-42dd-b7ef-3f31de5b56aa", "nombre": "cliente nombre"},
-      {"uuid": "4f32f432-021d-4165-b235-ab2e068aec32", "nombre": "cliente nombre"},
-      {"uuid": "2cbe2738-ae6b-466b-b09a-4fd4a4d4fdde", "nombre": "cliente nombre"}
-    ],
-    "new": {"uuid": "29f32641-565c-419d-80a1-3ed9005d5c4a", "nombre": "cliente nombre"},
-    "edit": {"uuid": "fff8ace3-efb2-42dd-b7ef-3f31de5b56aa", "nombre": "cliente nombre"}
   }
 }
