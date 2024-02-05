@@ -6,7 +6,7 @@
   "scripts": {
     "deploy": "serverless deploy",
     "test": "jest --coverage && npm run format",
-    "test-w": "jest --watch src/.+ts",
+    "test-w": "jest --watch -o",
     "dev": "cross-env NODE_ENV=dev serverless offline",
     "format": "prettier --write \"*.{ts,json}\"  \"{src,tests}/**/*.{ts,json}\"",
     "commit": "git add . && cat > commit.txt && git commit -F commit.txt && rm -rf commit.txt && git push"
