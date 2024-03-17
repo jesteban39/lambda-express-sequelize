@@ -4,7 +4,7 @@ import envVars from '@config/envVars'
 import {relations} from './relations'
 
 // de tipo any para poder eliminar getConnection
-let sequelize = <Sequelize | any>null
+let sequelize: any = null
 
 const defineSequelize = () => {
   sequelize = new Sequelize(envVars.dbName, envVars.dbUser, envVars.dbPass, {

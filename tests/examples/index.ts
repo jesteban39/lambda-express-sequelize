@@ -9,7 +9,9 @@ const mekeExample = (model: Model) => {
     if (attribute.primaryKey) {
       exp[key] = crypto.randomUUID()
     } else if (attribute.defaultValue) exp[key] = attribute.defaultValue
-    else exp[key] = `${model.tableName} ${attribute.field?.replace(/_/g, ' ')}`
+    else
+      exp[key] =
+        `${model.tableName.replace(/_/g, ' ')} ${attribute.field?.replace(/_/g, ' ')}`
     return exp
   }, {})
 }
