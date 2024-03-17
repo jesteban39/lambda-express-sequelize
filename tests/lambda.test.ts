@@ -78,7 +78,7 @@ const testModel = (modelName: string) => {
         path: `/api/${modelName}/filter`,
         modelName,
         params: {},
-        querys: {nombre: newElement.nombre},
+        querys: {uuid: newElement.uuid},
         headers: {},
         body: null
       }
@@ -86,7 +86,9 @@ const testModel = (modelName: string) => {
       expect(statusCode).toBe(200)
       expect(headers?.['content-type']).toMatch(/application\/json/)
       expect(Array.isArray(data)).toBe(true)
-      expect(data[0].nombre).toEqual(newElement.nombre)
+
+      expect(data[0]).toBeDefined()
+      expect(data[0]).toEqual(newElement)
     })
   })
 }
@@ -105,7 +107,7 @@ describe('Tests for CRUD', () => {
     const path = PATH_MODELS + '/' + file
     const stats = fs.statSync(path)
     if (stats.isFile()) {
-      const modelName = file[0].toUpperCase() + file.slice(1).replace('.ts', '')
+      const modelName = file.split('.')[0]
       testModel(modelName)
     }
   })

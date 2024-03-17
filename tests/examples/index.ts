@@ -1,17 +1,12 @@
 import fs from 'fs'
-import crypto from 'crypto'
 import examples from './examples.json'
 import type {Model} from '../types'
+import {mekeAtribut} from './mekeAtribut'
 
 const mekeExample = (model: Model) => {
   const attributes = Object.entries(model.getAttributes())
   return attributes.reduce((exp: any, [key, attribute]) => {
-    if (attribute.primaryKey) {
-      exp[key] = crypto.randomUUID()
-    } else if (attribute.defaultValue) exp[key] = attribute.defaultValue
-    else
-      exp[key] =
-        `${model.tableName.replace(/_/g, ' ')} ${attribute.field?.replace(/_/g, ' ')}`
+    exp[key] = mekeAtribut(attribute, model.tableName)
     return exp
   }, {})
 }

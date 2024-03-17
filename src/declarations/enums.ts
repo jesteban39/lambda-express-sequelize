@@ -1,6 +1,5 @@
 export enum NodeEnvs {
-  Dev = 'development',
-  Staging = 'staging',
-  Production = 'production',
-  Tests = 'tests'
+  dev = 'development',
+  prd = 'production',
+  test = 'test'
 }

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: lambda-express-sequelize
-  description: documentación lambda-express-sequelize
+  description: Backend lambda-express-sequelize
   version: 1.0.0
   servers:
     - http://localhost:4000
@@ -70,12 +70,12 @@ paths:
               schema:
                 type: object
                 example: *ref_1
-  /api/Client/filter?nombre={nombre}:
+  /api/Client/filter?uuid={uuid}:
     get:
       tags:
         - Client
       parameters:
-        - name: nombre
+        - name: uuid
           in: path
           type: string
           required: false
@@ -87,13 +87,7 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 08e78901-9cb6-4dcb-af06-3b342f2b90a4
-                    nombre: cliente nombre
-                  - uuid: 16e30d77-d81b-4d8a-a951-555276e92e15
-                    nombre: cliente nombre
                   - uuid: 6e29f58a-ae13-4c5e-801c-196b5e82494b
-                    nombre: cliente nombre
-                  - uuid: c63e0bd3-cbd9-450a-b5dc-9d98c5d5544e
                     nombre: cliente nombre
   /api/User:
     get:
@@ -159,12 +153,12 @@ paths:
               schema:
                 type: object
                 example: *ref_3
-  /api/User/filter?nombre={nombre}:
+  /api/User/filter?uuid={uuid}:
     get:
       tags:
         - User
       parameters:
-        - name: nombre
+        - name: uuid
           in: path
           type: string
           required: false
@@ -176,8 +170,6 @@ paths:
               schema:
                 type: array
                 example:
-                  - uuid: 076870fa-3764-48ed-a833-2e32d6689e6d
-                    nombre: usuario nombre
                   - uuid: 8d3dc470-0dd6-4c78-acea-8e0da01e8463
                     nombre: usuario nombre
 components:

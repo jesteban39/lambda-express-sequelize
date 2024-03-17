@@ -1,13 +1,11 @@
+import {NodeEnvs} from '@src/declarations/enums'
 import env from 'dotenv'
 import path from 'path'
 
-const nodeEnv = process.env.NODE_ENV ?? 'production'
+const nodeEnv = process.env.NODE_ENV ?? NodeEnvs.prd
 
 env.config({
-  path: path.resolve(
-    process.cwd(),
-    nodeEnv === 'production' ? '.env' : `.env.${process.env.NODE_ENV}`
-  )
+  path: path.resolve(process.cwd(), nodeEnv === NodeEnvs.prd ? '.env' : `.env.${nodeEnv}`)
 })
 
 export default {

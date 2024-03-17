@@ -1,6 +1,6 @@
 import type {Sequelize, Model} from 'sequelize'
-import user from './models/user'
-import client from './models/client'
+import user from './models/User'
+import client from './models/Client'
 
 interface TUser {
   uuid: string

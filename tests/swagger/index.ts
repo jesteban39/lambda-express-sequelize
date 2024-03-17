@@ -1,5 +1,6 @@
 import yaml from 'js-yaml'
 import fs from 'fs'
+import {name, version, description} from 'package.json'
 import {mekeSchema} from './mekeSchema'
 import type {ModelStatic, Model} from 'sequelize'
 import type {LambdaConfog, LambdaResult} from '../types'
@@ -16,9 +17,9 @@ export interface Parameters {
 let swaggerObject: any = {
   openapi: '3.0.0',
   info: {
-    title: 'lambda-express-sequelize',
-    description: 'documentación lambda-express-sequelize',
-    version: '1.0.0',
+    title: name,
+    description,
+    version,
     servers: [`http://localhost:4000`]
   },
   paths: {},

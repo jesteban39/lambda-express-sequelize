@@ -17,11 +17,11 @@ server.use(express.json())
 server.use(express.urlencoded({extended: true}))
 server.use(cookieParser())
 
-if (envVars.nodeEnv === NodeEnvs.Dev) {
+if (envVars.nodeEnv === NodeEnvs.dev) {
   server.use(morgan('dev'))
 }
 
-if (envVars.nodeEnv === NodeEnvs.Production) {
+if (envVars.nodeEnv === NodeEnvs.prd) {
   server.use(helmet())
 }
 
